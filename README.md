@@ -20,3 +20,9 @@ Open `http://localhost:4173`. To preview on an iPhone on the same network, add `
 - `assets/` contains the prepared WebP images, the muted film and the locally hosted fonts with their licenses.
 
 The site uses browser-native HTML, CSS and JavaScript. There is no install or build step.
+
+## Photography
+
+The four scene plates were rebuilt with the built-in image generator using the approved mockups as composition references. The prompt kept the near-black burgundy lighting, subject placement and reflections, requested crisp photographic detail, and removed the interface text. Origin keeps the wet cherry on the right, Essence keeps the cut fruit and hanging bead, and Character and Discover keep the front and three-quarter bottle views with the original label wording.
+
+The generated plates were 1672 × 941. The desktop WebP variants are 1920 × 1080 and 3840 × 2160 exports, and phones get separate crops. The Hero poster is an enlarged frame from the existing film.

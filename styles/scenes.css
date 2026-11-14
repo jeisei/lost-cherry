@@ -10,7 +10,7 @@
     radial-gradient(ellipse at 99% 76%, #36070c 0%, transparent 42%),
     radial-gradient(ellipse at 31% 83%, #190507 0%, transparent 38%),
     #0c0203;
-  transition: opacity 750ms var(--ease-out), visibility 750ms;
+  transition: opacity 950ms var(--ease-out), visibility 950ms;
 }
 
 .loader--visible {
@@ -61,7 +61,7 @@
 }
 
 .loader--visible .loader__light {
-  animation: loader-sweep 1.55s ease-in-out -450ms infinite;
+  animation: loader-sweep 2.1s ease-in-out -600ms infinite;
 }
 
 .hero {
@@ -93,7 +93,7 @@
 
 .hero__video {
   opacity: 0;
-  transition: opacity 260ms ease-out;
+  transition: opacity 460ms var(--ease-out);
 }
 
 .hero--playing .hero__video {
@@ -109,7 +109,7 @@
   line-height: 1;
   color: var(--color-muted);
   opacity: 0;
-  transition: opacity 300ms var(--ease-out);
+  transition: opacity 500ms var(--ease-out);
 }
 
 .hero--show-brand .hero__brand {
@@ -171,7 +171,7 @@
   font-size: 11px;
   font-weight: 600;
   letter-spacing: .22em;
-  transition: border-color 220ms ease-out, background-color 220ms ease-out;
+  transition: border-color 400ms ease-out, background-color 400ms ease-out;
 }
 
 .hero__replay:is(:hover, :focus-visible) {
@@ -191,7 +191,7 @@
 }
 
 .wordmark--origin {
-  transition: opacity 300ms var(--ease-out);
+  transition: opacity 500ms var(--ease-out);
 }
 
 .origin--wordmark-pending .wordmark--origin:not(:focus-visible) {
@@ -211,17 +211,9 @@
 }
 
 .origin__title {
-  margin-block: clamp(30px, 5.5vh, 59px) clamp(27px, 4.7vh, 53px);
+  margin-block: 0 clamp(27px, 4.7vh, 53px);
   font-size: clamp(42px, 4.45vw, 90px);
   letter-spacing: .28em;
-}
-
-.scene-index--origin {
-  gap: clamp(20px, 2.5vw, 40px);
-}
-
-.scene-index--origin .scene-index__line {
-  inline-size: clamp(55px, 13vw, 210px);
 }
 
 .origin__description {
@@ -237,28 +229,21 @@
 }
 
 .essence__image, .essence__clean {
-  inline-size: 100%;
-  block-size: 100%;
-  object-position: center;
-}
-
-.essence__image {
-  object-fit: fill;
-}
-
-.essence__clean {
   position: absolute;
   inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
   object-fit: fill;
 }
 
 .essence__drop {
   position: absolute;
-  inset-block-start: 67.02%;
-  inset-inline-start: 52.24%;
-  inline-size: 8.71%;
-  block-size: 25.44%;
-  transform-origin: 56% 0;
+  /* The box matches the source crop so the bead stays anchored when the plate scales. */
+  inset-block-start: 61.21%;
+  inset-inline-start: 52.39%;
+  inline-size: 8.01%;
+  block-size: 28.27%;
+  transform-origin: 50% 0;
 }
 
 .essence__drop-image {
@@ -268,9 +253,9 @@
 }
 
 .essence__drop-image--detached {
-  inset: 43.4% auto auto 10.9%;
-  inline-size: 73.3%;
-  block-size: 49%;
+  inset: 54.5% auto auto 10.45%;
+  inline-size: 80.6%;
+  block-size: 42.1%;
 }
 
 .essence__title {
@@ -310,6 +295,12 @@
   align-items: center;
 }
 
+@media (min-aspect-ratio: 19/10) {
+  .character__image, .discover__image {
+    object-fit: fill;
+  }
+}
+
 .character__qualities {
   display: grid;
   gap: clamp(8px, 2vh, 19px);
@@ -337,7 +328,7 @@
   opacity: .12;
   scale: 1 .8;
   content: "";
-  transition: opacity 255ms var(--ease-out), scale 255ms var(--ease-out);
+  transition: opacity 470ms var(--ease-out), scale 470ms var(--ease-out);
 }
 
 .character__quality--active::before {
@@ -358,7 +349,7 @@
   letter-spacing: .1em;
   line-height: 1.1;
   text-align: start;
-  transition: color 255ms ease-out;
+  transition: color 420ms ease-out;
 }
 
 .character__quality--active .character__button {
@@ -373,7 +364,7 @@
   line-height: 1.35;
   opacity: 0;
   translate: 0 5px;
-  transition: opacity 220ms ease-out, translate 255ms var(--ease-out);
+  transition: opacity 420ms ease-out, translate 470ms var(--ease-out);
 }
 
 .character__quality--active .character__description {
@@ -420,7 +411,7 @@
   font-size: clamp(12px, 1.42vw, 23px);
   font-weight: 600;
   letter-spacing: .07em;
-  transition: border-color 220ms ease-out, background-color 220ms ease-out;
+  transition: border-color 400ms ease-out, background-color 400ms ease-out;
 }
 
 .discover__link:is(:hover, :focus-visible) {
@@ -432,7 +423,7 @@
   font-family: Arial, sans-serif;
   font-size: 1.8em;
   font-weight: 400;
-  transition: translate 220ms var(--ease-out);
+  transition: translate 450ms var(--ease-out);
 }
 
 .discover__link:is(:hover, :focus-visible) .discover__arrow {
@@ -474,19 +465,15 @@
   .origin, .essence, .character, .discover {
     align-content: start;
     min-block-size: auto;
-    padding-block: calc(87px + env(safe-area-inset-top, 0px)) 42px;
+    padding-block: calc(104px + env(safe-area-inset-top, 0px)) 42px;
   }
 
   .origin__copy {
     margin-block: 0;
   }
 
-  .scene-index--origin .scene-index__line {
-    inline-size: 46px;
-  }
-
   .origin__title {
-    margin-block: 23px 17px;
+    margin-block: 0 17px;
     font-size: clamp(25px, 8vw, 48px);
     letter-spacing: .17em;
   }
@@ -538,8 +525,8 @@
   }
 
   .essence__drop {
-    inset-inline-start: 44.82%;
-    inline-size: 16.81%;
+    inset-inline-start: 45.11%;
+    inline-size: 15.47%;
   }
 
   .essence__notes {
@@ -558,7 +545,7 @@
   }
 
   .character, .discover {
-    padding-block-start: calc(69px + env(safe-area-inset-top, 0px));
+    padding-block-start: calc(103px + env(safe-area-inset-top, 0px));
   }
 
   .character__art, .discover__art {

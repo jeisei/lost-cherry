@@ -1,60 +1,103 @@
 const DROP_MEDIA = new URL("../assets/images/", import.meta.url);
+const ENTER_RATIO = 0.45;
+const EXIT_RATIO = 0.12;
 
 export function initDrop(art, motion) {
-  const clean = art.querySelector("[data-essence-clean]");
+  const cleanPlate = art.querySelector("[data-essence-clean]");
+  const cleanSource = cleanPlate.querySelector("source");
+  const clean = cleanPlate.querySelector("img");
   const drop = art.querySelector("[data-essence-drop]");
   const hanging = drop.querySelector("[data-drop-hanging]");
   const detached = drop.querySelector("[data-drop-detached]");
   const compact = matchMedia("(max-width: 700px)");
-  let played = false;
-  let animation;
+  const touch = matchMedia("(pointer: coarse)");
+  let inView = false;
+  let activeVisit;
+  let hasPlayed = false;
 
-  function showStill() {
-    animation?.cancel();
-    clean.hidden = true;
-    drop.hidden = true;
+  function cancelAnimations() {
+    for (const animation of drop.getAnimations({ subtree: true })) animation.cancel();
   }
 
-  async function play() {
-    if (played || motion.matches) return;
-    played = true;
+  function reset() {
+    activeVisit = undefined;
+    cancelAnimations();
+    cleanPlate.hidden = true;
+    drop.hidden = true;
+    hanging.hidden = false;
+    detached.hidden = true;
+  }
 
-    clean.src = new URL("essence-clean.webp", DROP_MEDIA);
-    hanging.src = new URL("drop-hanging.webp", DROP_MEDIA);
-    detached.src = new URL("drop-detached.webp", DROP_MEDIA);
+  async function play(visit) {
+    if (!clean.hasAttribute("src")) {
+      cleanSource.srcset = cleanSource.dataset.srcset;
+      clean.srcset = clean.dataset.srcset;
+      clean.src = clean.dataset.src;
+      hanging.src = new URL("drop-hanging.webp", DROP_MEDIA);
+      detached.src = new URL("drop-detached.webp", DROP_MEDIA);
+    }
 
     try {
-      await Promise.all([clean.decode(), hanging.decode(), detached.decode()]);
-      await new Promise((resolve) => setTimeout(resolve, 620));
-      const { top, bottom } = art.getBoundingClientRect();
-      if (motion.matches || document.hidden || bottom < 0 || top > innerHeight) return;
+      await Promise.all([
+        clean.decode(), hanging.decode(), detached.decode(),
+        new Promise((resolve) => setTimeout(resolve, 640)),
+      ]);
+      if (activeVisit !== visit) return;
 
-      clean.hidden = false;
+      cleanPlate.hidden = false;
       drop.hidden = false;
-      animation = drop.animate([
+      hasPlayed = true;
+      const stretched = "scale(.76, 1.14)";
+      const stretch = drop.animate([
         { transform: "scale(1)" },
-        { transform: "scale(.9, 1.08)" },
-        { transform: "scale(.76, 1.16)" },
-      ], { duration: 700, easing: "ease-in", fill: "forwards" });
-      await animation.finished;
+        { transform: "scale(.94, 1.035)", offset: .35 },
+        { transform: stretched },
+      ], { duration: 1120, easing: "cubic-bezier(.4, 0, .55, 1)", fill: "forwards" });
+      await stretch.finished;
+      if (activeVisit !== visit) return;
 
-      hanging.hidden = true;
       detached.hidden = false;
-      animation = drop.animate([
-        { transform: "translateY(15%) scale(.8, 1.06)", opacity: 1 },
-        { transform: "translateY(40%) scale(.89, 1.01)", opacity: 1, offset: .55 },
-        { transform: "translateY(115%) scale(.89, 1.07)", opacity: 0 },
-      ], { duration: compact.matches ? 540 : 790, easing: "cubic-bezier(.55, .02, .94, .54)", fill: "forwards" });
-      await animation.finished;
+      const release = { duration: 180, easing: "ease-in-out", fill: "both" };
+      hanging.animate([{ opacity: 1 }, { opacity: 0 }], release);
+      detached.animate([{ opacity: 0 }, { opacity: 1 }], release);
+
+      const fall = drop.animate([
+        { transform: stretched, opacity: 1 },
+        { transform: "translateY(27%) scale(.87, 1.04)", opacity: 1, offset: .58 },
+        { transform: "translateY(105%) scale(.9, 1.11)", opacity: 0 },
+      ], { duration: compact.matches ? 990 : 1230, easing: "cubic-bezier(.45, 0, .84, .48)", fill: "both" });
+      stretch.cancel();
+      await fall.finished;
+      if (activeVisit !== visit) return;
+
       drop.hidden = true;
+      cancelAnimations();
     } catch {
-      showStill();
+      if (activeVisit !== visit) return;
+      cleanPlate.hidden = true;
+      drop.hidden = true;
+      cancelAnimations();
     }
   }
 
-  motion.addEventListener("change", () => {
-    if (motion.matches) showStill();
-  });
+  function sync() {
+    if (!inView || motion.matches || document.hidden) {
+      if (activeVisit) reset();
+      return;
+    }
+    if (activeVisit || (touch.matches && hasPlayed)) return;
 
-  return { play };
+    activeVisit = Symbol();
+    play(activeVisit);
+  }
+
+  const observer = new IntersectionObserver(([{ intersectionRatio }]) => {
+    if (intersectionRatio >= ENTER_RATIO) inView = true;
+    if (intersectionRatio <= EXIT_RATIO) inView = false;
+    sync();
+  }, { threshold: [EXIT_RATIO, ENTER_RATIO] });
+
+  observer.observe(art);
+  motion.addEventListener("change", sync);
+  document.addEventListener("visibilitychange", sync);
 }

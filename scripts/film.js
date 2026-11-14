@@ -99,15 +99,12 @@ export function initFilm(hero, motion) {
   return { ready };
 }
 
-export async function revealHero(loader, hero, filmReady, motion) {
+export async function revealHero(loader, hero, filmReady) {
   if (!loader.classList.contains("loader--visible")) return;
 
   const poster = hero.querySelector(".hero__poster");
   const timeout = new Promise((resolve) => setTimeout(resolve, FIRST_FRAME_TIMEOUT));
   await Promise.race([Promise.all([poster.decode().catch(() => {}), filmReady]), timeout]);
 
-  if (!motion.matches && !location.hash && scrollY < hero.offsetHeight / 2) {
-    hero.classList.add("hero--intro");
-  }
   loader.classList.remove("loader--visible");
 }
