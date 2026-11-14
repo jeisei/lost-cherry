@@ -1,0 +1,112 @@
+.scene--awaiting :is(.origin__art, .origin__copy, .essence__art, .essence__title, .essence__notes, .character__art, .character__qualities, .discover__art, .discover__copy) {
+  opacity: 0;
+}
+
+.scene--entering :is(.origin__art, .essence__art, .character__art, .discover__art) {
+  animation: scene-fade 810ms var(--ease-out) both;
+}
+
+.scene--entering .origin__copy > * {
+  animation: scene-rise 660ms var(--ease-out) both;
+}
+
+.scene--entering .origin__title {
+  animation-delay: 100ms;
+}
+
+.scene--entering .origin__description {
+  animation-delay: 220ms;
+}
+
+.scene--entering .essence__title {
+  animation: scene-rise 660ms var(--ease-out) 75ms both;
+}
+
+.scene--entering .essence__note {
+  animation: scene-rise 570ms var(--ease-out) both;
+}
+
+.scene--entering .essence__note:nth-child(2) {
+  animation-delay: 120ms;
+}
+
+.scene--entering .essence__note:nth-child(3) {
+  animation-delay: 240ms;
+}
+
+.scene--entering .character__quality {
+  animation: scene-rise 620ms var(--ease-out) 100ms both;
+}
+
+.scene--entering .character__quality:nth-child(2) {
+  animation-delay: 215ms;
+}
+
+.scene--entering .character__quality:nth-child(3) {
+  animation-delay: 330ms;
+}
+
+.scene--entering .discover__art {
+  animation: discover-reveal 860ms var(--ease-out) both;
+}
+
+.scene--entering .discover__copy > * {
+  animation: scene-rise 630ms var(--ease-out) 190ms both;
+}
+
+.scene--entering .discover__name {
+  animation-delay: 320ms;
+}
+
+.scene--entering .discover__link {
+  animation-delay: 470ms;
+}
+
+.hero--intro .hero__title {
+  animation: scene-rise 800ms var(--ease-out) both;
+}
+
+.hero--intro .hero__cue {
+  animation: scene-fade 630ms var(--ease-out) 230ms both;
+}
+
+.hero--intro .hero__cue-line {
+  animation: cue-grow 670ms var(--ease-out) 250ms both;
+}
+
+@keyframes loader-sweep {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(172%); }
+}
+
+@keyframes scene-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scene-rise {
+  from { opacity: 0; translate: 0 12px; }
+  to { opacity: 1; translate: 0 0; }
+}
+
+@keyframes cue-grow {
+  from { scale: 1 0; }
+  to { scale: 1 1; }
+}
+
+@keyframes discover-reveal {
+  from { opacity: 0; clip-path: inset(73% 0 0); }
+  40% { opacity: .68; }
+  to { opacity: 1; clip-path: inset(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .scene--awaiting :is(.origin__art, .origin__copy, .essence__art, .essence__title, .essence__notes, .character__art, .character__qualities, .discover__art, .discover__copy) {
+    opacity: 1;
+  }
+}

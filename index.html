@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#0b0103">
+    <meta name="description" content="An editorial exploration of TOM FORD Lost Cherry.">
+    <title>TOM FORD — LOST CHERRY</title>
+    <link rel="icon" href="data:,">
+    <link rel="preload" href="./assets/images/hero-poster.webp" as="image" media="(min-width: 701px)" fetchpriority="high">
+    <link rel="preload" href="./assets/images/hero-poster-mobile.webp" as="image" media="(max-width: 700px)" fetchpriority="high">
+    <link rel="preload" href="./assets/fonts/montserrat.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="./styles/base.css">
+    <link rel="stylesheet" href="./styles/scenes.css">
+    <link rel="stylesheet" href="./styles/motion.css">
+    <script type="module" src="./scripts/main.js"></script>
+  </head>
+  <body>
+    <div class="loader" data-loader aria-hidden="true">
+      <div class="loader__identity">
+        <span class="loader__brand">TOM FORD</span>
+        <span class="loader__name">LOST CHERRY</span>
+      </div>
+      <div class="loader__track"><span class="loader__light"></span></div>
+    </div>
+    <script>
+      // Show the loader at first paint and release it if the module fails to load.
+      const loadingOverlay = document.querySelector("[data-loader]");
+      if (!matchMedia("(prefers-reduced-motion: reduce)").matches && !location.hash) {
+        loadingOverlay.classList.add("loader--visible");
+        setTimeout(() => loadingOverlay.classList.remove("loader--visible"), 3500);
+      }
+    </script>
+
+    <main>
+      <section id="film" class="scene hero" aria-labelledby="film-title">
+        <div class="hero__media" aria-hidden="true">
+          <picture>
+            <source media="(max-width: 700px)" srcset="./assets/images/hero-poster-mobile.webp">
+            <img class="hero__poster" src="./assets/images/hero-poster.webp" width="910" height="512" alt="" fetchpriority="high">
+          </picture>
+          <video class="hero__video" data-film data-src="./assets/video/lost-cherry.mp4" muted playsinline preload="none" aria-hidden="true" disablepictureinpicture disableremoteplayback></video>
+        </div>
+        <span class="hero__brand" aria-hidden="true">TOM FORD</span>
+        <h1 id="film-title" class="hero__title" tabindex="-1">LOST CHERRY</h1>
+        <button type="button" class="hero__replay" data-film-replay hidden>REPLAY FILM</button>
+        <div class="hero__cue" aria-hidden="true">
+          <span>SCROLL TO EXPLORE</span>
+          <span class="hero__cue-line"></span>
+        </div>
+      </section>
+
+      <section id="origin" class="scene origin" data-reveal aria-labelledby="origin-title">
+        <picture class="origin__art">
+          <source media="(max-width: 700px)" srcset="./assets/images/origin-mobile.webp">
+          <img class="scene__image origin__image" src="./assets/images/origin.webp" width="1536" height="864" loading="lazy" decoding="async" alt="">
+        </picture>
+        <a class="wordmark wordmark--origin" href="#film" data-back-to-film aria-label="TOM FORD, back to the film">TOM FORD</a>
+        <div class="origin__copy">
+          <div class="scene-index scene-index--origin" aria-hidden="true">
+            <span>01 / 04</span><span class="scene-index__line"></span>
+          </div>
+          <h2 id="origin-title" class="scene__title origin__title">THE ORIGIN</h2>
+          <p class="origin__description">A bold interpretation of the forbidden.<br class="origin__break"> Lost Cherry was created by Tom Ford in 2018 as a contrast between innocent sweetness and sensual depth.</p>
+        </div>
+      </section>
+
+      <section id="essence" class="scene essence" data-reveal aria-labelledby="essence-title">
+        <div class="essence__art" data-essence-art aria-hidden="true">
+          <img class="scene__image essence__image" src="./assets/images/essence.webp" width="1160" height="570" loading="lazy" decoding="async" alt="">
+          <img class="essence__clean" data-essence-clean width="1160" height="570" alt="" hidden>
+          <div class="essence__drop" data-essence-drop hidden>
+            <img class="essence__drop-image essence__drop-image--hanging" data-drop-hanging width="101" height="145" alt="">
+            <img class="essence__drop-image essence__drop-image--detached" data-drop-detached width="74" height="71" alt="" hidden>
+          </div>
+        </div>
+        <a class="wordmark" href="#film" data-back-to-film aria-label="TOM FORD, back to the film">TOM FORD</a>
+        <div class="scene-index scene-index--essence" aria-hidden="true">
+          <span>02 / 04</span><span class="scene-index__line"></span>
+        </div>
+        <h2 id="essence-title" class="scene__title essence__title">THE<br> ESSENCE</h2>
+        <dl class="essence__notes">
+          <div class="essence__note">
+            <dt class="essence__note-name">CHERRY</dt>
+            <dd class="essence__note-description">Juicy and provocative.</dd>
+          </div>
+          <div class="essence__note">
+            <dt class="essence__note-name">ALMOND</dt>
+            <dd class="essence__note-description">A smooth, seductive contrast.</dd>
+          </div>
+          <div class="essence__note">
+            <dt class="essence__note-name">TONKA</dt>
+            <dd class="essence__note-description">Warm, addictive depth.</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section id="character" class="scene character" data-reveal data-character aria-label="The character">
+        <picture class="character__art">
+          <source media="(max-width: 700px)" srcset="./assets/images/character-mobile.webp">
+          <img class="scene__image character__image" src="./assets/images/character.webp" width="1160" height="568" loading="lazy" decoding="async" alt="Lost Cherry eau de parfum in a red glass bottle beside a cherry">
+        </picture>
+        <a class="wordmark" href="#film" data-back-to-film aria-label="TOM FORD, back to the film">TOM FORD</a>
+        <div class="scene-index scene-index--character" aria-hidden="true">
+          <span>03 / 04</span><span class="scene-index__line"></span>
+        </div>
+        <ul class="character__qualities" aria-label="Fragrance qualities">
+          <li class="character__quality character__quality--active">
+            <button class="character__button" type="button" aria-pressed="true" aria-describedby="quality-sweet">SWEET</button>
+            <p class="character__description" id="quality-sweet">The luscious sweetness of ripe cherry.</p>
+          </li>
+          <li class="character__quality">
+            <button class="character__button" type="button" aria-pressed="false" aria-describedby="quality-bold">BOLD</button>
+            <p class="character__description" id="quality-bold">A striking, sensual contrast of bitter almond and depth.</p>
+          </li>
+          <li class="character__quality">
+            <button class="character__button" type="button" aria-pressed="false" aria-describedby="quality-addictive">ADDICTIVE</button>
+            <p class="character__description" id="quality-addictive">A warm, lingering trail that stays with you.</p>
+          </li>
+        </ul>
+      </section>
+
+      <section id="discover" class="scene discover" data-reveal aria-labelledby="discover-title">
+        <picture class="discover__art">
+          <source media="(max-width: 700px)" srcset="./assets/images/discover-mobile.webp">
+          <img class="scene__image discover__image" src="./assets/images/discover.webp" width="1160" height="571" loading="lazy" decoding="async" alt="Lost Cherry bottle and cherries on a red reflective surface">
+        </picture>
+        <a class="wordmark" href="#film" data-back-to-film aria-label="TOM FORD, back to the film">TOM FORD</a>
+        <div class="scene-index scene-index--discover" aria-hidden="true">
+          <span>04 / 04</span><span class="scene-index__line"></span>
+        </div>
+        <div class="discover__copy">
+          <h2 id="discover-title" class="scene__title discover__title">DISCOVER</h2>
+          <p class="discover__name">LOST CHERRY</p>
+          <a class="discover__link" href="#film" data-back-to-film>
+            <span>BACK TO THE FILM</span><span class="discover__arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
